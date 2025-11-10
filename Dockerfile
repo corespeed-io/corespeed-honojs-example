@@ -2,8 +2,9 @@ FROM denoland/deno:2.1.2
 
 WORKDIR /app
 
-COPY deno.json .
-COPY main.ts .
+COPY . .
+
+RUN if [ -f .env.example ]; then echo "ERROR: .env.example should not be included in the Docker image" && exit 1; fi
 
 RUN deno cache main.ts
 
